@@ -2,3 +2,6 @@
     npm init vue@latest   по инструкции https://vuejs.org/guide/quick-start.html#creating-a-vue-application
 11. Переносим html шаблон магазина в App vue
 12. Добавляем главную страницу во vue router
+13. Прокидываем шаблон продуктов и получаем продукты с бекенд
+    npm install axios
+
