@@ -1,3 +1,4 @@
 10. Создаем проект на vue3, клиентская часть интернет магазин
     npm init vue@latest   по инструкции https://vuejs.org/guide/quick-start.html#creating-a-vue-application
 11. Переносим html шаблон магазина в App vue
+12. Добавляем главную страницу во vue router
