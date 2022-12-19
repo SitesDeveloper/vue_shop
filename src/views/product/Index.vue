@@ -314,7 +314,10 @@
                                       <span>(112)</span> </div>
                                     <p class="text"> {{product.description}}</p>
                                     <div class="price">
-                                      <h2> ${{product.price}} USD <del> $65 USD</del></h2>
+                                      <h2> 
+                                        ${{product.price}} USD 
+                                        <del> ${{product.price}} USD</del>
+                                      </h2>
                                       <h6> In stuck</h6>
                                     </div>
                                     <div class="color-varient"> <a href="#0"
