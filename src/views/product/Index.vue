@@ -218,7 +218,7 @@
                        aria-labelledby="pills-grid-tab">
                     <div class="row">
 
-                      <div v-for="product in products" class="col-xl-4 col-lg-6 col-6 ">
+                      <div v-for="product in products" class="col-xl-4 col-lg-6 col-6 " v-bind:key="product.id">
 
                         <div class="products-three-single w-100  mt-30">
                           <div class="products-three-single-img">
@@ -320,17 +320,16 @@
                                       </h2>
                                       <h6> In stuck</h6>
                                     </div>
-                                    <div class="color-varient"> <a href="#0"
-                                                                   class="color-name pink">
-                                      <span>Pink</span> </a> <a href="#0"
-                                                                class="color-name red">
-                                      <span>Red</span> </a>
-                                      <a href="#0"
-                                         class="color-name yellow"><span>Yellow</span>
-                                      </a> <a href="#0" class="color-name blue">
-                                        <span>Blue</span>
-                                      </a> <a href="#0" class="color-name black">
-                                        <span>Black</span> </a> </div>
+                                    <div class="color-varient"> 
+
+                                      <template v-for="groupProduct in product.group_products" v-bind:key="groupProduct.id">
+                                        <a  v-for="color in groupProduct.colors" v-bind:key="color.id"
+                                          href="#0" :style="`background: #${color.title};`"  class="color-name">
+                                          <span>{{ color.title }}</span> 
+                                        </a> 
+                                      </template>
+
+                                    </div>
                                     <div class="add-product">
                                       <h6>Qty:</h6>
                                       <div class="button-group">
