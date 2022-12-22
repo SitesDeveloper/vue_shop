@@ -101,7 +101,7 @@
                   <div class="checkbox-item">
                     <form>
                       <div class="form-group" v-for="category in filterList.categories" v-bind:key="category.id"> 
-                        <input type="checkbox" :id="`category_${category.id}`"> 
+                        <input v-model="categories" :value="category.id" type="checkbox" :id="`category_${category.id}`"> 
                         <label :for="`category_${category.id}`">{{category.title}}</label> 
                       </div>
                     </form>
@@ -111,7 +111,7 @@
                   <h4>Color Option </h4>
                   <ul class="color-option">
                     <li v-for="color in filterList.colors" v-bind:key="color.id"> 
-                      <a href="#0" class="color-option-single" :style="`background: #${color.title};`"> 
+                      <a :id="`filter_color_${color.id}`" @click.prevent="addColor(color.id)" href="#0" class="color-option-single" :style="`background: #${color.title};`"> 
                         <span> {{ color.title }}</span> 
                       </a> 
                     </li>
@@ -125,14 +125,14 @@
                       <label for="priceRange">Price:</label> 
                       <input type="text" id="priceRange" readonly> 
                     </div> 
-                    <button class="filterbtn" type="submit"> Filter </button>
+                    <button @click.prevent="filterProducts" class="filterbtn" type="submit"> Filter </button>
                   </div>
                 </div>
                 <div class="single-sidebar-box mt-30 wow fadeInUp animated pb-0 border-bottom-0 ">
                   <h4>Tags </h4>
                   <ul class="popular-tag">
                     <li v-for="tag in filterList.tags" v-bind:key="tag.id"> 
-                      <a href="#0" > {{ tag.title }} </a> 
+                      <a :id="`filter_tag_${tag.id}`" @click.prevent="addTag(tag.id)" href="#0" > {{ tag.title }} </a> 
                     </li>
                   </ul>
                 </div>
@@ -362,7 +362,7 @@
 export default {
   name: "Index",
   mounted() {
-    $(document).trigger("init");
+    $(document).trigger("changed");
     this.getProducts();
     this.getFilterList();
   },
@@ -370,18 +370,68 @@ export default {
     return {
       products: [],
       popupProduct: null,
-      filterList: []
+      filterList: [],
+      categories: [],
+      colors: [],
+      tags: [],
+      prices: []
     }
   },
   methods: {
+
+    filterProducts() {
+      let prices = $('#priceRange').val();
+      this.prices = prices.replace(/[\s+]|[$]/g, '').split('-');
+
+      this.axios.post('http://localhost:8876/api/products', {
+        categories: this.categories,        
+        colors: this.colors,
+        tags: this.tags,        
+        prices: this.prices,
+      })
+      .then( res => {
+        console.log(res);
+        this.products = res.data.data;
+      })
+      .finally(()=>{
+        $(document).trigger("changed");
+      })
+    },
+
+
+
+    addTag(id) {
+      if (!this.tags.includes(id)) {
+        this.tags.push(id);
+        $(`#filter_tag_${id}`).addClass('active');
+      } else {
+        $(`#filter_tag_${id}`).removeClass('active');
+        this.tags = this.tags.filter(elem => {
+          return elem!=id;
+        });
+      }
+    },
+
+    addColor(id) {
+      if (!this.colors.includes(id)) {
+        this.colors.push(id);
+        $(`#filter_color_${id}`).addClass('active');
+      } else {
+        $(`#filter_color_${id}`).removeClass('active');
+        this.colors = this.colors.filter(elem => {
+          return elem!=id;
+        });
+      }
+    },
+
     getProducts() {
-      this.axios.get('http://localhost:8876/api/products')
+      this.axios.post('http://localhost:8876/api/products', {})
           .then( res => {
             console.log(res);
             this.products = res.data.data;
           })
           .finally(()=>{
-            $(document).trigger("init");
+            $(document).trigger("changed");
           })
     },
     getProduct(id) {
@@ -391,7 +441,7 @@ export default {
             this.popupProduct = res.data.data;
           })
           .finally(()=>{
-            $(document).trigger("init");
+            $(document).trigger("changed");
           })
     },
     getFilterList() {
@@ -417,7 +467,7 @@ export default {
 
           })
           .finally(()=>{
-            $(document).trigger("init");
+            $(document).trigger("changed");
           })
     },
   }

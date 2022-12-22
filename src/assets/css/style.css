@@ -11284,6 +11284,20 @@ pagination start
   background: var(--thm-black);
   margin: 10px 10px 0px 0px;
 }
+.single-sidebar-box .color-option-single:before {
+  content: '';
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  border: 2px solid rgb(233, 233, 223);
+  top: -3px;
+  left: -3px;
+}
+
+.single-sidebar-box .color-option-single.active:before {
+  border: 2px solid rgb(29, 82, 42);
+}
+
 .single-sidebar-box .color-option-single span {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -13030,6 +13044,11 @@ pagination start
 .popular-tag li:hover a {
   color: #ffffff;
   background-color: var(--thm-base);
+}
+
+.popular-tag li a.active {
+  color: #ffffff;
+  background-color: #255858;
 }
 
 .blog-sidebar-follow-us {
