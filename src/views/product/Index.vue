@@ -151,14 +151,12 @@
                       class="right-box justify-content-md-between justify-content-center wow fadeInUp animated">
                     <div class="short-by">
                       <div class="select-box">
-                        <select class="wide">
-                          <option data-display="Short by latest">Featured </option>
-                          <option value="1">Best selling </option>
-                          <option value="2">Alphabetically, A-Z</option>
-                          <option value="3">Alphabetically, Z-A</option>
-                          <option value="3">Price, low to high</option>
-                          <option value="3">Price, high to low</option>
-                          <option value="3">Date, old to new</option>
+                        <select class="wide" :onchange="onChangeSortBy" id="sortBySelect" >
+                          <option value="">No Sorted</option>
+                          <option value="alpha_az">Alphabetically, A-Z</option>
+                          <option value="alpha_za">Alphabetically, Z-A</option>
+                          <option value="price_lh">Price, low to high</option>
+                          <option value="price_hl">Price, high to low</option>
                         </select>
                       </div>
                     </div>
@@ -374,10 +372,16 @@ export default {
       categories: [],
       colors: [],
       tags: [],
-      prices: []
+      prices: [],
+      sortBy: '',
     }
   },
   methods: {
+    onChangeSortBy() {
+      this.sortBy = $('#sortBySelect').val();
+      console.log('sortBy=' +  this.sortBy );
+      this.filterProducts();
+    },
 
     filterProducts() {
       let prices = $('#priceRange').val();
@@ -388,6 +392,7 @@ export default {
         colors: this.colors,
         tags: this.tags,        
         prices: this.prices,
+        sort: this.sortBy,
       })
       .then( res => {
         console.log(res);
