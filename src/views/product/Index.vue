@@ -29,7 +29,7 @@
             <div class="product-categories-one__inner">
               <ul>
                 <li> <a href="#0" class="img-box">
-                  <div class="inner"> <img src="src/assets/images/shop/product-categories-v1-img1.png"
+                  <div class="inner"> <img src="/src/assets/images/shop/product-categories-v1-img1.png"
                                            alt="" /> </div>
                 </a>
                   <div class="title"> <a href="#0">
@@ -37,7 +37,7 @@
                   </a> </div>
                 </li>
                 <li> <a href="#0" class="img-box">
-                  <div class="inner"> <img src="src/assets/images/shop/product-categories-v1-img2.png"
+                  <div class="inner"> <img src="/src/assets/images/shop/product-categories-v1-img2.png"
                                            alt="" /> </div>
                 </a>
                   <div class="title"> <a href="#0">
@@ -45,7 +45,7 @@
                   </a> </div>
                 </li>
                 <li> <a href="#0" class="img-box">
-                  <div class="inner"> <img src="src/assets/images/shop/product-categories-v1-img3.png"
+                  <div class="inner"> <img src="/src/assets/images/shop/product-categories-v1-img3.png"
                                            alt="" /> </div>
                 </a>
                   <div class="title"> <a href="#0">
@@ -53,7 +53,7 @@
                   </a> </div>
                 </li>
                 <li> <a href="#0" class="img-box">
-                  <div class="inner"> <img src="src/assets/images/shop/product-categories-v1-img4.png"
+                  <div class="inner"> <img src="/src/assets/images/shop/product-categories-v1-img4.png"
                                            alt="" /> </div>
                 </a>
                   <div class="title"> <a href="#0">
@@ -61,7 +61,7 @@
                   </a> </div>
                 </li>
                 <li> <a href="#0" class="img-box">
-                  <div class="inner"> <img src="src/assets/images/shop/product-categories-v1-img5.png"
+                  <div class="inner"> <img src="/src/assets/images/shop/product-categories-v1-img5.png"
                                            alt="" /> </div>
                 </a>
                   <div class="title"> <a href="#0">
@@ -69,7 +69,7 @@
                   </a> </div>
                 </li>
                 <li> <a href="#0" class="img-box">
-                  <div class="inner"> <img src="src/assets/images/shop/product-categories-v1-img6.png"
+                  <div class="inner"> <img src="/src/assets/images/shop/product-categories-v1-img6.png"
                                            alt="" /> </div>
                 </a>
                   <div class="title"> <a href="#0">
@@ -194,10 +194,10 @@
 
                         <div class="products-three-single w-100  mt-30">
                           <div class="products-three-single-img">
-                            <a href="shop-details-3.html" class="d-block">
+                            <router-link :to="{name: 'products.show', params: {id:product.id}}" class="d-block">
                               <img :src="product.image_url" class="first-img" alt="" />
-                              <img src="src/assets/images/home-three/productss2-hover-1.png" alt="" class="hover-img" />
-                            </a>
+                              <img src="/src/assets/images/home-three/productss2-hover-1.png" alt="" class="hover-img" />
+                            </router-link>
                             <div class="products-grid-one__badge-box"> <span
                                 class="bg_base badge new ">New</span>
                             </div>
@@ -298,16 +298,17 @@
                                           Cart </button>
                                       </div>
                                     </div>
-                                    <div class="payment-method"> <a href="#0"> <img
-                                        src="src/assets/images/payment_method/method_1.png"
+                                    <div class="payment-method"> 
+                                      <a href="#0"> <img
+                                        src="/src/assets/images/payment_method/method_1.png"
                                         alt=""> </a>
                                       <a href="#0"> <img
-                                          src="src/assets/images/payment_method/method_2.png"
+                                          src="/src/assets/images/payment_method/method_2.png"
                                           alt=""> </a> <a href="#0"> <img
-                                          src="src/assets/images/payment_method/method_3.png"
+                                          src="/src/assets/images/payment_method/method_3.png"
                                           alt=""> </a>
                                       <a href="#0"> <img
-                                          src="src/assets/images/payment_method/method_4.png"
+                                          src="/src/assets/images/payment_method/method_4.png"
                                           alt=""> </a> </div>
                                   </div>
                                 </div>
@@ -318,7 +319,11 @@
 
                           <div class="products-three-single-content text-center">
                             <span> {{product.category.title}}</span>
-                            <h5> <a href="shop-details-3.html"> {{product.title}} </a> </h5>
+                            <h5> 
+                              <router-link :to="{name: 'products.show', params: {id:product.id}}">
+                                {{product.title}}
+                              </router-link>
+                            </h5>
                             <p><del>$200.00</del>
                               ${{product.price}}</p>
                           </div>
