@@ -886,6 +886,7 @@ jQuery(function ($) {
         if ($(".increaseQty").length) {
             var minVal = 1,
                 maxVal = 20;
+            $(".increaseQty").off();    
             $(".increaseQty").on("click", function () {
                 var $parentElm = $(this).parents(".qtySelector");
                 $(this).addClass("clicked");
@@ -902,6 +903,7 @@ jQuery(function ($) {
         ;
 
         if ($(".decreaseQty").length) {
+            $(".decreaseQty").off();    
             $(".decreaseQty").on("click", function () {
                 var $parentElm = $(this).parents(".qtySelector");
                 $(this).addClass("clicked");
